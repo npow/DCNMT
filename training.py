@@ -175,7 +175,6 @@ def main(config, tr_stream, dev_stream):
 
 
 if __name__ == "__main__":
-    assert sys.version_info >= (3,4)
     # Get configurations for model
     configuration = configurations.get_config()
     logger.info("Model options:\n{}".format(pprint.pformat(configuration)))

@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import codecs
 import logging
 import os
 import subprocess
@@ -11,9 +12,9 @@ from picklable_itertools.extras import equizip
 
 def merge_parallel(src_filename, trg_filename, merged_filename):
     total = 0
-    with open(src_filename, 'r', encoding='utf-8') as left:
-        with open(trg_filename, 'r', encoding='utf-8') as right:
-            with open(merged_filename, 'w') as final:
+    with codecs.open(src_filename, 'r', 'utf-8') as left:
+        with codecs.open(trg_filename, 'r', 'utf-8') as right:
+            with codecs.open(merged_filename, 'w', 'utf-8') as final:
                 for lline, rline in equizip(left, right):
                     if (lline != '\n') and (rline != '\n'):
                         total += 1
@@ -22,9 +23,9 @@ def merge_parallel(src_filename, trg_filename, merged_filename):
 
 def split_parallel(merged_filename, src_filename, trg_filename):
     total = 0
-    with open(merged_filename) as combined:
-        with open(src_filename, 'w') as left:
-            with open(trg_filename, 'w') as right:
+    with codecs.open(merged_filename, 'r', 'utf-8') as combined:
+        with codecs.open(src_filename, 'w', 'utf-8') as left:
+            with codecs.open(trg_filename, 'w', 'utf-8') as right:
                 for line in combined:
                     total += 1
                     line = line.split('|||')

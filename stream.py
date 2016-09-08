@@ -37,7 +37,7 @@ class TextFileWithSEOSS(TextFile):
                  unk_token='<UNK>', level='word', preprocess=None,
                  encoding=None):
         super(TextFileWithSEOSS, self).__init__(files, dictionary, bos_token, eos_token,
-                                                unk_token, level, preprocess, encoding)
+                                                unk_token, level, preprocess)
 
     def get_data(self, state=None, request=None):
         if request is not None:

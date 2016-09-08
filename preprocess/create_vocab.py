@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import codecs
 import pickle
 import logging
 import os
@@ -47,7 +48,6 @@ def create_dictionary(input_file, dictionary_file, vocab_size):
     for i, (word, count) in enumerate(vocab_count):
         vocab[word] = i + 2
 
-    print(counter, vocab_count)
     safe_pickle(vocab, dictionary_file)
 
 
@@ -59,13 +59,13 @@ def create_vocabularies(src_file, trg_file, config):
 
     logger.info("Creating source vocabulary [{}]".format(src_vocab_name))
     if not os.path.exists(src_vocab_name):
-        create_dictionary(open(src_file, 'r', encoding='utf-8'), src_vocab_name, config['src_vocab_size'])
+        create_dictionary(codecs.open(src_file, 'r', 'utf-8'), src_vocab_name, config['src_vocab_size'])
     else:
         logger.info("...file exists [{}]".format(src_vocab_name))
 
     logger.info("Creating target vocabulary [{}]".format(trg_vocab_name))
     if not os.path.exists(trg_vocab_name):
-        create_dictionary(open(trg_file, 'r', encoding='utf-8'), trg_vocab_name, config['trg_vocab_size'])
+        create_dictionary(codecs.open(trg_file, 'r', 'utf-8'), trg_vocab_name, config['trg_vocab_size'])
     else:
         logger.info("...file exists [{}]".format(trg_vocab_name))
 
